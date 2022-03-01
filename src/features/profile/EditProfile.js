@@ -21,18 +21,21 @@ export default function EditProfile() {
     const navigate = useNavigate()
 
     const onChange = (e) => {
+        console.log("o", e.target.value);
         setFormData({
             ...formData, [e.target.name]: e.target.value
         })
 
     }
+    useEffect(() => {
+        if (profile) {
+            setFormData(profile.data)
+        }
+    }, [profile])
+    useEffect(() => {
 
-    // useEffect(() => {
-
-    //     dispatch(getLoggedProfile())
-
-
-    // }, [])
+        dispatch(getLoggedProfile())
+    }, [])
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(editProfile({ formData, navigate }))
